@@ -1,0 +1,22 @@
+# General
+alias c='clear'
+alias zsh_config='vim ~/.zshrc'
+alias sshconfig="vim ~/.ssh/config"
+
+# List all files colorized in long format
+alias l="ls -laF"
+
+# PHP
+alias art='php artisan'
+alias cu='composer update'
+alias cr='composer require'
+alias ci='composer install'
+alias cda="composer dump-autoload -o"
+alias pf="phpunit --filter"
+alias pestf="pest --filter"
+
+# Git
+alias nah='git reset --hard;git clean -df'
+alias gc="git checkout"
+alias gpo="git push origin"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
