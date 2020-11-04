@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Install zsh
+echo 'Install oh-my-zsh'
+echo '-----------------'
+rm -rf $HOME/.oh-my-zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+# Add global gitignore
+[ -f $HOME/.global-gitignore ] && rm $HOME/.global-gitignore
+ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
+git config --global core.excludesfile $HOME/.global-gitignore
+
+# Symlink zsh prefs
+rm $HOME/.zshrc
+ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+
+# Install powerlevel10k theme
+echo 'Install powerlevel10k theme'
+echo '-----------------'
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Symlink p10k prefs
+[ -f $HOME/.p10k.zsh ] && rm $HOME/.p10k.zsh && ln -s $HOME/.dotfiles/shell/.p10k.zsh $HOME/.p10k.zsh
+
+# Install zsh-autocompletions
+echo 'Install zsh-autocompletions plugin'
+echo '-----------------'
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
+echo 'All done!'
+echo 'Things to do to make the pk10 terminal theme work:'
+echo '1. Install menlo patched font included in ~/.dotfiles/misc'
+
+echo '++++++++++++++++++++++++++++++'
+echo 'Some optional tidbits'
+
+echo '1. Make a .dotfiles-custom/shell/.aliases for your personal commands'
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'

@@ -15,11 +15,14 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 COMPLETION_WAITING_DOTS="true"
 
-ZSH_CUSTOM=$HOME/.dotfiles/misc/oh-my-zsh-custom
+plugins=(git zsh-completions)
 
-plugins=(git)
+ZSH_CUSTOM=$ZSH/custom
 
 source $ZSH/oh-my-zsh.sh
+
+# Enable autocompletion
+autoload -Uz compinit && compinit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
