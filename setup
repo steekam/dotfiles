@@ -21,7 +21,7 @@ echo '-----------------'
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Symlink p10k prefs
-[ -f $HOME/.p10k.zsh ] && rm $HOME/.p10k.zsh && ln -s $HOME/.dotfiles/shell/.p10k.zsh $HOME/.p10k.zsh
+([ -f $HOME/.p10k.zsh ] && rm $HOME/.p10k.zsh) || ln -s $HOME/.dotfiles/shell/.p10k.zsh $HOME/.p10k.zsh
 
 # Install zsh-autocompletions
 echo 'Install zsh-autocompletions plugin'
