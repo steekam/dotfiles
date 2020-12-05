@@ -8,10 +8,14 @@ alias l="ls -laF"
 
 # PHP
 alias art='php artisan'
+alias mfs='php artisan migrate:fresh --seed'
+alias mf='php artisan migrate:fresh'
+
 alias cu='composer update'
 alias cr='composer require'
 alias ci='composer install'
 alias cda="composer dump-autoload -o"
+
 alias pf="phpunit --filter"
 alias pestf="pest --filter"
 
