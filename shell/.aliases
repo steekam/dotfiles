@@ -10,6 +10,7 @@ alias l="ls -laF"
 alias art='php artisan'
 alias mfs='php artisan migrate:fresh --seed'
 alias mf='php artisan migrate:fresh'
+alias tinker='php artisan tinker'
 
 alias cu='composer update'
 alias cr='composer require'
