@@ -53,4 +53,14 @@ if [ -d "$HOME/.composer/vendor/bin" ]
 		# Add vendor/bin of php project in current directory
 		path+=('./vendor/bin')
 fi
+
+
+if [ -d "$HOME/.config/composer/vendor/bin" ] 
+	then
+		# Add global composer bin
+		path+=("$HOME/.config/composer/vendor/bin")
+
+		# Add vendor/bin of php project in current directory
+		path+=('./vendor/bin')
+fi
 # END Composer
