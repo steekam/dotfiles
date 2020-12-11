@@ -64,3 +64,5 @@ if [ -d "$HOME/.config/composer/vendor/bin" ]
 		path+=('./vendor/bin')
 fi
 # END Composer
+
+export PATH="$HOME/.poetry/bin:$PATH"
