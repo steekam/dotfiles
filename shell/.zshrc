@@ -65,4 +65,4 @@ if [ -d "$HOME/.config/composer/vendor/bin" ]
 fi
 # END Composer
 
-export PATH="$HOME/.poetry/bin:$PATH"
+[ -d ¨$HOME/.poetry/bin¨ ] && export PATH="$HOME/.poetry/bin:$PATH"
