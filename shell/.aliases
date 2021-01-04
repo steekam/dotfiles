@@ -33,3 +33,6 @@ alias ws='windscribe'
 alias ws_acc='windscribe account'
 alias ws_us='windscribe connect US'
 alias ws_gb='windscribe connect GB'
+
+# Docker
+alias docker-ps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}"'
