@@ -9,3 +9,9 @@ function commit() {
   git add .
   eval "git commit -a -m '${commitMessage}'"
 }
+
+# Bash into docker container
+function docker-bash() {
+  # Accepts container name
+  docker exec -it $1 bash
+}
