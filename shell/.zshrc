@@ -15,7 +15,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-completions)
+plugins=(git zsh-completions systemd)
 
 ZSH_CUSTOM=$ZSH/custom
 
