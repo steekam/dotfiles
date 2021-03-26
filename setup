@@ -34,6 +34,13 @@ echo 'Install zsh-autocompletions plugin'
 echo '-----------------'
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
 
+# 
+# Setting up vim
+# 
+echo 'Symlink .vimrc'
+echo '-----------------'
+[ -f $HOME/.vimrc ] && rm $HOME/.vimrc
+ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
