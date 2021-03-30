@@ -44,6 +44,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # END NVM
 
+# Add ./node_modules/bin of current project to path
+# Check if npm is installed first
+[ -x "$(command -v npm)" ] && path+=('./node_modules/.bin')
+
 # Composer
 if [ -d "$HOME/.composer/vendor/bin" ] 
 	then
