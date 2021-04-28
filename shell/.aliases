@@ -19,6 +19,8 @@ alias cda="composer dump-autoload -o"
 
 alias pf="phpunit --filter"
 alias pestf="pest --filter"
+alias at="php artisan test"
+alias atf="php artisan test --filter"
 
 # Git
 alias nah='git reset --hard;git clean -df'
