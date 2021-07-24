@@ -70,3 +70,5 @@ fi
 # END Composer
 
 [ -d "$HOME/.poetry/bin" ]  && path+=("$HOME/.poetry/bin")
+
+[ -d "$HOME/.local/bin" ]  && path+=("$HOME/.local/bin")
