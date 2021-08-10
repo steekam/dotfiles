@@ -72,3 +72,4 @@ fi
 [ -d "$HOME/.poetry/bin" ]  && path+=("$HOME/.poetry/bin")
 
 [ -d "$HOME/.local/bin" ]  && path+=("$HOME/.local/bin")
+
