@@ -10,7 +10,6 @@ function commit() {
   eval "git commit -a -m '${commitMessage}'"
 }
 
-
 function editor-commit() {
   git add .
   git commit -a
@@ -22,6 +21,7 @@ function docker-bash() {
   docker exec -it $1 bash
 }
 
+# Open tinkerwell with CWD / specified directory
 function tinkerwell {
   if [ $# -eq 0 ] || [ $1 = "." ]; then
     TW_PATH=$(pwd)
@@ -32,4 +32,9 @@ function tinkerwell {
   TW_PATH=$(echo -n $TW_PATH | base64)
 
   open "tinkerwell://?cwd=$TW_PATH"
+}
+
+# Drop and create Mysql database
+function db-fresh {
+  mysql -u root -p -e "DROP DATABASE $1; CREATE DATABASE $1;"
 }
