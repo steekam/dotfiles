@@ -21,6 +21,10 @@ function docker-bash() {
   docker exec -it $1 bash
 }
 
+function db-run {
+  mysql -u root -p -e $1;
+}
+
 # Drop and create Mysql database
 function db-fresh {
   mysql -u root -p -e "DROP DATABASE $1; CREATE DATABASE $1;"
