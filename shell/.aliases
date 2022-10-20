@@ -39,5 +39,5 @@ alias ws_gb='windscribe connect GB'
 # Docker
 alias docker-ps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}"'
 
-# Enable function keys on K2 keyboard
-alias keychron='sudo systemctl start keychron'
+# Change git submodules URLs to SSH using perl
+alias gitmodules_to_ssh="perl -i -p -e 's|https://(.*?)/|git@\1:|g' .gitmodules"

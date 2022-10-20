@@ -1,5 +1,5 @@
+# IDEs & Code Editors
 .vscode
-
 .idea
 
 # Node
@@ -10,3 +10,9 @@ yarn-error.log
 # Python
 **/__pycache__
 **/.pytest_cache
+
+# venv
+.venv
+
+# Misc
+.DS_*

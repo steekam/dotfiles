@@ -73,3 +73,5 @@ fi
 
 [ -d "$HOME/.local/bin" ]  && path+=("$HOME/.local/bin")
 
+# Install venv environment in project directory
+export PIPENV_VENV_IN_PROJECT=1
