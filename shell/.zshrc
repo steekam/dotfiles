@@ -15,7 +15,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-completions systemd)
+plugins=(git zsh-completions systemd asdf)
 
 ZSH_CUSTOM=$ZSH/custom
 
@@ -38,18 +38,12 @@ for file in ~/.dotfiles-custom/shell/.{exports,aliases,functions,zshrc}; do
 done
 unset file
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# END NVM
-
 # Add ./node_modules/bin of current project to path
 # Check if npm is installed first
 [ -x "$(command -v npm)" ] && path+=('./node_modules/.bin')
 
 # Composer
-if [ -d "$HOME/.composer/vendor/bin" ] 
+if [ -d "$HOME/.composer/vendor/bin" ]
 	then
 		# Add global composer bin
 		path+=("$HOME/.composer/vendor/bin")
@@ -59,7 +53,7 @@ if [ -d "$HOME/.composer/vendor/bin" ]
 fi
 
 
-if [ -d "$HOME/.config/composer/vendor/bin" ] 
+if [ -d "$HOME/.config/composer/vendor/bin" ]
 	then
 		# Add global composer bin
 		path+=("$HOME/.config/composer/vendor/bin")
@@ -68,8 +62,6 @@ if [ -d "$HOME/.config/composer/vendor/bin" ]
 		path+=('./vendor/bin')
 fi
 # END Composer
-
-[ -d "$HOME/.poetry/bin" ]  && path+=("$HOME/.poetry/bin")
 
 [ -d "$HOME/.local/bin" ]  && path+=("$HOME/.local/bin")
 
