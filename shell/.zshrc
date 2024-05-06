@@ -67,3 +67,9 @@ fi
 
 # Install venv environment in project directory
 export PIPENV_VENV_IN_PROJECT=1
+
+# Wrapify subshells in Warp
+printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh" }}\x9c'
+
+# Disable Homebrew auto-update
+export HOMEBREW_NO_AUTO_UPDATE=1
