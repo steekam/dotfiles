@@ -16,3 +16,5 @@ yarn-error.log
 
 # Misc
 .DS_*
+
+**/.tool-versions
