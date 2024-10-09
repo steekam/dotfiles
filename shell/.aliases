@@ -41,3 +41,6 @@ alias docker-ps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}"'
 
 # Change git submodules URLs to SSH using perl
 alias gitmodules_to_ssh="perl -i -p -e 's|https://(.*?)/|git@\1:|g' .gitmodules"
+
+# Bundle exec
+alias be='bundle exec'
