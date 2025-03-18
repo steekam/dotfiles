@@ -1,7 +1,7 @@
 [core]
 	excludesfile = ~/.global-gitignore
-    fsmonitor = true
-    untrackedCache = true
+    ; fsmonitor = true
+    ; untrackedCache = true
 [column]
     ui = auto
 [branch]
