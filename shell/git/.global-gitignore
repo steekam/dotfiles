@@ -1,6 +1,7 @@
 # IDEs & Code Editors
 .vscode
 .idea
+.cursor
 
 # Node
 node_modules
