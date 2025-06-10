@@ -1,0 +1,165 @@
+#!/bin/bash
+
+# Remote Development Server Setup Script for Linux/Ubuntu
+# Based on local dotfiles configuration adapted for development workflow
+
+set -e
+
+echo "========================================"
+echo "Remote Development Server Setup"
+echo "========================================"
+
+# Update system packages
+echo "Updating system packages..."
+sudo apt update && sudo apt upgrade -y
+
+# Install essential packages
+echo "Installing essential packages..."
+sudo apt install -y curl wget git vim build-essential software-properties-common \
+    apt-transport-https ca-certificates gnupg lsb-release unzip
+
+# Install productivity tools
+echo "Installing productivity tools..."
+sudo apt install -y tmux htop tree jq ripgrep fd-find
+
+# Install and setup Zsh + Oh My Zsh
+echo "Installing Zsh and Oh My Zsh..."
+sudo apt install -y zsh
+chsh -s $(which zsh)
+
+# Install Oh My Zsh
+rm -rf $HOME/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+# Install Powerlevel10k theme
+echo "Installing Powerlevel10k theme..."
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Install zsh-completions
+echo "Installing zsh-completions plugin..."
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
+
+# Setup dotfiles symlinks
+echo "Setting up dotfiles..."
+[ -f $HOME/.zshrc ] && rm $HOME/.zshrc
+ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+
+[ -f $HOME/.p10k.zsh ] && rm $HOME/.p10k.zsh
+ln -s $HOME/.dotfiles/shell/.p10k.zsh $HOME/.p10k.zsh
+
+[ -f $HOME/.vimrc ] && rm $HOME/.vimrc
+ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
+
+# Git configuration for work
+echo "Setting up Git configuration..."
+[ -f $HOME/.global-gitignore ] && rm $HOME/.global-gitignore
+ln -s $HOME/.dotfiles/shell/git/.global-gitignore $HOME/.global-gitignore
+
+[ -f $HOME/.gitconfig ] && rm $HOME/.gitconfig
+ln -s $HOME/.dotfiles/shell/git/.gitconfig $HOME/.gitconfig
+
+# Add work-specific git config
+echo "Setting up work Git identity..."
+git config --global user.name "Stephen Wanyee"
+git config --global user.email "stephen@patriumhealth.com"
+
+# Environment configuration handled by dotfiles (.exports, .aliases, .functions)
+echo "Environment configuration will be loaded from dotfiles..."
+
+# Install ASDF version manager
+echo "Installing ASDF version manager..."
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc
+echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.bashrc
+export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
+source ~/.asdf/asdf.sh
+
+# Install Node.js via ASDF
+echo "Installing Node.js..."
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs latest
+
+# Install Bun
+echo "Installing Bun..."
+curl -fsSL https://bun.sh/install | bash
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Install Python and Poetry
+echo "Installing Python..."
+sudo apt install -y python3 python3-pip python3-venv
+asdf plugin add python
+asdf install python latest
+asdf global python latest
+
+echo "Installing Poetry..."
+curl -sSL https://install.python-poetry.org | python3 -
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install Docker
+echo "Installing Docker..."
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo usermod -aG docker $USER
+
+# Setup SSH config and security
+echo "Setting up SSH configuration and security..."
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+# Generate SSH key for work
+echo "Generating SSH key for work..."
+ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_patrium -C "stephen@patriumhealth.com" -N ""
+chmod 600 ~/.ssh/id_rsa_patrium
+chmod 644 ~/.ssh/id_rsa_patrium.pub
+
+# SSH hardening configuration
+cat << EOF > ~/.ssh/config
+# Security hardening
+Host *
+    Protocol 2
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    HashKnownHosts yes
+    VisualHostKey yes
+    PasswordAuthentication no
+    ChallengeResponseAuthentication no
+    PubkeyAuthentication yes
+
+# Work repositories
+Host gitlab.com
+	HostName gitlab.com
+	User git
+	PreferredAuthentications publickey
+	IdentitiesOnly yes
+	IdentityFile ~/.ssh/id_rsa_patrium
+
+Host gitlab.patrium.health
+    HostName gitlab.patrium.health
+    PreferredAuthentications publickey
+	IdentitiesOnly yes
+	IdentityFile ~/.ssh/id_rsa_patrium
+EOF
+
+chmod 600 ~/.ssh/config
+
+# Display public key for easy copying
+echo "========================================="
+echo "Your SSH public key (add this to GitLab):"
+echo "========================================="
+cat ~/.ssh/id_rsa_patrium.pub
+echo "========================================="
+
+echo "========================================"
+echo "Setup Complete!"
+echo "========================================"
+echo "Please do the following:"
+echo "1. Add the SSH public key shown above to GitLab"
+echo "2. Log out and back in for Docker group membership to take effect"
+echo "3. Start a new zsh session or run: exec zsh"
+echo "4. Configure p10k theme: p10k configure"
+echo "5. Test SSH connection: ssh -T git@gitlab.patrium.health"
+echo "========================================"
