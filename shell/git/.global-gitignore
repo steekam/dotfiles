@@ -2,6 +2,8 @@
 .vscode
 .idea
 .cursor
+.zed
+.junie
 
 # Node
 node_modules

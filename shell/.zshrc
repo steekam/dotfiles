@@ -59,6 +59,9 @@ fi
 
 [ -d "$HOME/.local/bin" ] && path+=("$HOME/.local/bin")
 
+# poetry bin
+[ -d "$HOME/.local/poetry/bin" ] && path+=("$HOME/.local/poetry/bin")
+
 # =============================================================================
 # Environment Variables
 # =============================================================================
@@ -78,6 +81,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Android SDK
 export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/27.1.12297006
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
@@ -96,6 +101,10 @@ esac
 # Herd PHP Configuration
 export HERD_PHP_84_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/84/"
 export PATH="/Users/steekam/Library/Application Support/Herd/bin/":$PATH
+
+# Added by Windsurf
+export PATH="/Users/steekam/.codeium/windsurf/bin:$PATH"
+
 
 # Asdf configuration
 export ASDF_DIR="$HOME/.asdf"
