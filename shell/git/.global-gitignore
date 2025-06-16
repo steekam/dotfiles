@@ -4,6 +4,7 @@
 .cursor
 .zed
 .junie
+AGENT.md
 
 # Node
 node_modules
@@ -21,3 +22,6 @@ yarn-error.log
 .DS_*
 
 **/.tool-versions
+
+# Planning files for agent contex
+plan*.md

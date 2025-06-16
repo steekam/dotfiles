@@ -105,6 +105,11 @@ export PATH="/Users/steekam/Library/Application Support/Herd/bin/":$PATH
 # Added by Windsurf
 export PATH="/Users/steekam/.codeium/windsurf/bin:$PATH"
 
+# Go
+if [ -d "$HOME/go" ]; then
+  export GOPATH="$HOME/go"
+  export PATH="$GOPATH/bin:$PATH"
+fi
 
 # Asdf configuration
 export ASDF_DIR="$HOME/.asdf"
