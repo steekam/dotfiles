@@ -115,3 +115,7 @@ fi
 export ASDF_DIR="$HOME/.asdf"
 # Asdf shims path has to be first in path
 export PATH="$ASDF_DIR/shims:$PATH"
+
+# opencode
+export PATH=/Users/steekam/.opencode/bin:$PATH
+export PATH=$PATH:$HOME/.maestro/bin

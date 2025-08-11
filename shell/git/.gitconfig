@@ -1,5 +1,6 @@
 [core]
 	excludesfile = ~/.global-gitignore
+	autocrlf = input
     ; fsmonitor = true
     ; untrackedCache = true
 [column]

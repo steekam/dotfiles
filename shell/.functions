@@ -1,13 +1,9 @@
 #  Commit everything
-function commit() {
-  commitMessage="$1"
-
-  if [ "$commitMessage" = "" ]; then
-     commitMessage="wip"
-  fi
-
-  git add .
-  eval "git commit -a -m '${commitMessage}'"
+function commit () {
+    local msg="$1"
+    [[ "$msg" == -* || -z "$msg" ]] && msg="wip" || shift
+    git add .
+    git commit -a -m "$msg" "$@"
 }
 
 function editor-commit() {
