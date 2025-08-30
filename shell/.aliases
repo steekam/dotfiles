@@ -44,3 +44,8 @@ alias gitmodules_to_ssh="perl -i -p -e 's|https://(.*?)/|git@\1:|g' .gitmodules"
 
 # Bundle exec
 alias be='bundle exec'
+
+
+# Patrium OpenVPN3 connection
+alias vpn-start='openvpn3 session-start --config patrium-eu'
+alias vpn-stop='openvpn3 session-manage --disconnect --config patrium-eu'

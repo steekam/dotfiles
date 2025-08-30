@@ -113,8 +113,12 @@ fi
 
 # Asdf configuration
 export ASDF_DIR="$HOME/.asdf"
+# Add asdf binary to PATH
+export PATH="$ASDF_DIR/bin:$PATH"
 # Asdf shims path has to be first in path
 export PATH="$ASDF_DIR/shims:$PATH"
+# Source asdf shell integration
+source "$ASDF_DIR/asdf.sh"
 
 # opencode
 export PATH=/Users/steekam/.opencode/bin:$PATH
