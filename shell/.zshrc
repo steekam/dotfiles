@@ -123,3 +123,6 @@ source "$ASDF_DIR/asdf.sh"
 # opencode
 export PATH=/Users/steekam/.opencode/bin:$PATH
 export PATH=$PATH:$HOME/.maestro/bin
+
+# bun completions
+[ -s "/home/steekam/.bun/_bun" ] && source "/home/steekam/.bun/_bun"

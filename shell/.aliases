@@ -47,5 +47,5 @@ alias be='bundle exec'
 
 
 # Patrium OpenVPN3 connection
-alias vpn-start='openvpn3 session-start --config patrium-eu'
-alias vpn-stop='openvpn3 session-manage --disconnect --config patrium-eu'
+alias vpn-start='openvpn3 session-start --config patrium-eu-mod'
+alias vpn-stop='openvpn3 session-manage --disconnect --config patrium-eu-mod'
