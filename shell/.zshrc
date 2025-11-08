@@ -75,14 +75,17 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 # Tool-specific Configurations
 # =============================================================================
 # Bun
-[ -s "/Users/steekam/.bun/_bun" ] && source "/Users/steekam/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Android SDK
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/27.1.12297006
+if [[ "$(uname)" == "Darwin" ]]; then
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+else
+  export ANDROID_HOME=$HOME/Android/Sdk
+fi
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/28.2.13676358
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
@@ -92,18 +95,20 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # pnpm
-export PNPM_HOME="/Users/steekam/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+if [[ "$(uname)" == "Darwin" ]]; then
+  export PNPM_HOME="/Users/steekam/Library/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+fi
 
 # Herd PHP Configuration
 export HERD_PHP_84_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/84/"
 export PATH="/Users/steekam/Library/Application Support/Herd/bin/":$PATH
 
 # Added by Windsurf
-export PATH="/Users/steekam/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
 # Go
 if [ -d "$HOME/go" ]; then
@@ -121,8 +126,17 @@ export PATH="$ASDF_DIR/shims:$PATH"
 source "$ASDF_DIR/asdf.sh"
 
 # opencode
-export PATH=/Users/steekam/.opencode/bin:$PATH
+[ -d "$HOME/.opencode/bin" ] && export PATH=$HOME/.opencode/bin:$PATH
+
 export PATH=$PATH:$HOME/.maestro/bin
 
 # bun completions
-[ -s "/home/steekam/.bun/_bun" ] && source "/home/steekam/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# pnpm
+export PNPM_HOME="/home/steekam/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
