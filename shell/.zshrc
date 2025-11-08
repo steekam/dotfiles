@@ -134,9 +134,11 @@ export PATH=$PATH:$HOME/.maestro/bin
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # pnpm
+if [[ "$(uname)" == "Linux" ]]; then
 export PNPM_HOME="/home/steekam/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+fi
 # pnpm end
