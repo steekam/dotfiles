@@ -4,8 +4,6 @@
 .cursor
 .zed
 .junie
-AGENT.md
-AGENTS.md
 
 # Node
 node_modules
@@ -26,3 +24,14 @@ yarn-error.log
 
 # Planning files for agent contex
 plan*.md
+
+AGENT.md
+AGENTS.md
+CLAUDE.md
+
+.playwright-mcp
+
+*tmp
+
+.opencode
+.claude

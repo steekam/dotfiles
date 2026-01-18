@@ -44,3 +44,5 @@
 	email = waynewanyee@gmail.com
 [include]
 	path = ~/.dotfiles-custom/shell/git/.gitconfig
+[gitbutler]
+	gitbutlerCommitter = 0

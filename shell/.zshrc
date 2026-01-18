@@ -11,7 +11,7 @@ fi
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel10k/powerlevel10k"
 COMPLETION_WAITING_DOTS="true"
-plugins=(git zsh-completions asdf)
+plugins=(git zsh-completions)
 ZSH_CUSTOM=$ZSH/custom
 
 source $ZSH/oh-my-zsh.sh
@@ -19,8 +19,13 @@ source $ZSH/oh-my-zsh.sh
 # Enable autocompletion
 autoload -Uz compinit && compinit
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+## disable Powerlevel10k when Cursor Agent runs
+if [[ -n "$CURSOR_AGENT" ]]; then
+  # Skip theme initialization for better compatibility
+else
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ -r ~/.p10k.zsh ]] && source ~/.p10k.zsh
+fi
 
 # =============================================================================
 # Dotfiles Loading
@@ -116,14 +121,8 @@ if [ -d "$HOME/go" ]; then
   export PATH="$GOPATH/bin:$PATH"
 fi
 
-# Asdf configuration
-export ASDF_DIR="$HOME/.asdf"
-# Add asdf binary to PATH
-export PATH="$ASDF_DIR/bin:$PATH"
-# Asdf shims path has to be first in path
-export PATH="$ASDF_DIR/shims:$PATH"
-# Source asdf shell integration
-source "$ASDF_DIR/asdf.sh"
+# Mise (asdf replacement)
+eval "$(mise activate zsh)"
 
 # opencode
 [ -d "$HOME/.opencode/bin" ] && export PATH=$HOME/.opencode/bin:$PATH
@@ -133,12 +132,12 @@ export PATH=$PATH:$HOME/.maestro/bin
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# pnpm
+# pnpm (Linux)
 if [[ "$(uname)" == "Linux" ]]; then
-export PNPM_HOME="/home/steekam/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+  export PNPM_HOME="/home/steekam/.local/share/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
 fi
 # pnpm end
