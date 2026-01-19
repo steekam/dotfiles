@@ -66,6 +66,18 @@ ln -s $HOME/.dotfiles/opencode/opencode.json $HOME/.config/opencode/opencode.jso
 [ -d $HOME/.config/opencode/commands ] && rm -r $HOME/.config/opencode/commands
 ln -s $HOME/.dotfiles/opencode/commands $HOME/.config/opencode/commands
 
+# MegaSync default ignore template (platform-specific location)
+echo 'Setup MegaSync default ignore template'
+echo '-----------------'
+if [[ "$(uname)" == "Darwin" ]]; then
+    MEGA_CONFIG_DIR="$HOME/Library/Application Support/Mega Limited/MEGAsync"
+else
+    MEGA_CONFIG_DIR="$HOME/.local/share/data/Mega Limited/MEGAsync"
+fi
+mkdir -p "$MEGA_CONFIG_DIR"
+[ -f "$MEGA_CONFIG_DIR/.megaignore.default" ] && rm "$MEGA_CONFIG_DIR/.megaignore.default"
+ln -s "$HOME/.dotfiles/mega/.megaignore.default" "$MEGA_CONFIG_DIR/.megaignore.default"
+
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
 echo 'All done!'
