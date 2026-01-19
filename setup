@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Install mise (runtime manager)
+echo 'Install mise'
+echo '-----------------'
+curl https://mise.run | sh
+
 # Install zsh
 echo 'Install oh-my-zsh'
 echo '-----------------'
