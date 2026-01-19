@@ -74,6 +74,7 @@ fi
 # =============================================================================
 # Python
 export PIPENV_VENV_IN_PROJECT=1
+export POETRY_VENV_IN_PROJECT=1
 
 # Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1

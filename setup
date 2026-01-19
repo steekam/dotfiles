@@ -61,6 +61,11 @@ ln -s $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 ln -s $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 [ -d $HOME/.claude/commands ] && rm -r $HOME/.claude/commands
 ln -s $HOME/.dotfiles/claude/commands $HOME/.claude/commands
+# Platform-specific settings override
+[ -f $HOME/.claude/settings.local.json ] && rm $HOME/.claude/settings.local.json
+if [[ "$(uname)" == "Linux" ]] && [ -f $HOME/.dotfiles/claude/settings.linux.json ]; then
+    ln -s $HOME/.dotfiles/claude/settings.linux.json $HOME/.claude/settings.local.json
+fi
 
 # OpenCode config (~/.config/opencode on both macOS and Linux)
 echo 'Symlink OpenCode config'
