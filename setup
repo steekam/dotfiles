@@ -52,20 +52,20 @@ echo '-----------------'
 ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 
 # Claude Code config
-echo 'Symlink Claude Code config'
+echo 'Setup Claude Code config'
 echo '-----------------'
 mkdir -p $HOME/.claude
 [ -f $HOME/.claude/settings.json ] && rm $HOME/.claude/settings.json
-ln -s $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+# Deep merge default settings with platform-specific overrides
+if [[ "$(uname)" == "Linux" ]] && [ -f $HOME/.dotfiles/claude/settings.linux.json ]; then
+    jq -s '.[0] * .[1]' $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.linux.json > $HOME/.claude/settings.json
+else
+    cp $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+fi
 [ -f $HOME/.claude/CLAUDE.md ] && rm $HOME/.claude/CLAUDE.md
 ln -s $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 [ -d $HOME/.claude/commands ] && rm -r $HOME/.claude/commands
 ln -s $HOME/.dotfiles/claude/commands $HOME/.claude/commands
-# Platform-specific settings override
-[ -f $HOME/.claude/settings.local.json ] && rm $HOME/.claude/settings.local.json
-if [[ "$(uname)" == "Linux" ]] && [ -f $HOME/.dotfiles/claude/settings.linux.json ]; then
-    ln -s $HOME/.dotfiles/claude/settings.linux.json $HOME/.claude/settings.local.json
-fi
 
 # OpenCode config (~/.config/opencode on both macOS and Linux)
 echo 'Symlink OpenCode config'
