@@ -6,6 +6,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # =============================================================================
+# OS Detection (cached for performance)
+# =============================================================================
+_OS="$(uname)"
+
+# =============================================================================
 # Oh My Zsh Configuration
 # =============================================================================
 export ZSH=$HOME/.oh-my-zsh
@@ -15,9 +20,6 @@ plugins=(git zsh-completions)
 ZSH_CUSTOM=$ZSH/custom
 
 source $ZSH/oh-my-zsh.sh
-
-# Enable autocompletion
-autoload -Uz compinit && compinit
 
 ## disable Powerlevel10k when Cursor Agent runs
 if [[ -n "$CURSOR_AGENT" ]]; then
@@ -45,7 +47,7 @@ unset file
 # Path Configuration
 # =============================================================================
 # Add ./node_modules/bin of current project to path
-[ -x "$(command -v npm)" ] && path+=('./node_modules/.bin')
+(( $+commands[npm] )) && path+=('./node_modules/.bin')
 
 # Composer Configuration
 if [ -d "$HOME/.composer/vendor/bin" ]; then
@@ -84,7 +86,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Android SDK
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$_OS" == "Darwin" ]]; then
   export ANDROID_HOME=$HOME/Library/Android/sdk
 else
   export ANDROID_HOME=$HOME/Android/Sdk
@@ -95,12 +97,21 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 
-# SDKMAN
+# SDKMAN (lazy-loaded for faster startup)
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+_sdk_lazy_load() {
+  unfunction sdk java gradle kotlin groovy mvn 2>/dev/null
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+}
+sdk() { _sdk_lazy_load && sdk "$@" }
+java() { _sdk_lazy_load && java "$@" }
+gradle() { _sdk_lazy_load && gradle "$@" }
+kotlin() { _sdk_lazy_load && kotlin "$@" }
+groovy() { _sdk_lazy_load && groovy "$@" }
+mvn() { _sdk_lazy_load && mvn "$@" }
 
 # pnpm
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$_OS" == "Darwin" ]]; then
   export PNPM_HOME="/Users/steekam/Library/pnpm"
   case ":$PATH:" in
     *":$PNPM_HOME:"*) ;;
@@ -133,7 +144,7 @@ export PATH=$PATH:$HOME/.maestro/bin
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # pnpm (Linux)
-if [[ "$(uname)" == "Linux" ]]; then
+if [[ "$_OS" == "Linux" ]]; then
   export PNPM_HOME="/home/steekam/.local/share/pnpm"
   case ":$PATH:" in
     *":$PNPM_HOME:"*) ;;

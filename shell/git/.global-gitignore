@@ -21,6 +21,7 @@ yarn-error.log
 .DS_*
 
 **/.tool-versions
+**/.mise.toml
 
 # Planning files for agent contex
 plan*.md
@@ -34,4 +35,5 @@ CLAUDE.md
 *tmp
 
 .opencode
+opencode.json
 .claude
