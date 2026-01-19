@@ -173,7 +173,6 @@
       "Bash(emulator -list-avds)",
       "Bash(emulator @:*)",
       "Bash(source ~/.zshrc)",
-
       "Bash(psql --version)",
       "Bash(psql -l:*)",
       "Bash(psql -c \\\\d:*)",
@@ -186,10 +185,10 @@
       "Bash(psql -c SELECT:*)",
       "Bash(psql -c EXPLAIN:*)",
       "Bash(psql -c SHOW:*)",
-
       "Bash(unzip:*)",
       "Bash(unzip -l:*)",
-      "Bash(zipinfo:*)"
+      "Bash(zipinfo:*)",
+      "Bash(npm info:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
@@ -207,7 +206,6 @@
       "~/Projects/Patrium"
     ]
   },
-  "alwaysThinkingEnabled": true,
   "hooks": {
     "PermissionRequest": [
       {
@@ -218,16 +216,7 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Hero.aiff"
-          }
-        ]
-      }
     ]
-  }
+  },
+  "alwaysThinkingEnabled": true
 }

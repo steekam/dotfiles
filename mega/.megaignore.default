@@ -1,59 +1,52 @@
 # Sync this file across devices
-+sync:.megaignore
-
++n:.megaignore
 # === Package Manager ===
--dnG:node_modules
--dnG:.pnpm
--dnG:.yarn
--nG:pnpm-lock.yaml
--nG:yarn.lock
--nG:package-lock.json
--nG:bun.lockb
-
+-dn:node_modules
+-dn:.pnpm
+-dn:.yarn
+-n:pnpm-lock.yaml
+-n:yarn.lock
+-n:package-lock.json
+-n:bun.lockb
 # === Build Outputs ===
--dnG:dist
--dnG:build
--dnG:.next
--dnG:.nuxt
--dnG:.output
--dnG:.turbo
--dnG:.cache
--dnG:coverage
--dnG:.parcel-cache
-
+-dn:dist
+-dn:build
+-dn:.next
+-dn:.nuxt
+-dn:.output
+-dn:.turbo
+-dn:.cache
+-dn:coverage
+-dn:.parcel-cache
 # === React Native / Expo ===
--dnG:.expo
--pnG:ios/Pods
--pnG:ios/build
--pnG:ios/DerivedData
--pnG:android/build
--pnG:android/.gradle
--pnG:android/app/build
--dnG:.maestro
-
+-dn:.expo
+-dp:ios/Pods
+-dp:ios/build
+-dp:ios/DerivedData
+-dp:android/build
+-dp:android/.gradle
+-dp:android/app/build
+-dn:.maestro
 # === System Files ===
--nG:.DS_Store
--nG:Thumbs.db
--nG:desktop.ini
--nG:._*
-
+-n:.DS_Store
+-n:Thumbs.db
+-n:desktop.ini
+-n:._*
 # === Editor/IDE (local state only) ===
--dnG:.idea
--dnG:.vscode
--nG:*.swp
--nG:*.swo
--nG:*~
-
+-dn:.idea
+-dn:.vscode
+-n:*.swp
+-n:*.swo
+-n:*~
 # === Logs & Temp ===
--nG:*.log
--nG:npm-debug.log*
--dnG:tmp
--dnG:temp
-
+-n:*.log
+-n:npm-debug.log*
+-dn:tmp
+-dn:temp
 # === Environment (CRITICAL - contains secrets) ===
--nG:.env
--nG:.env.*
--nG:*.local
-
+-n:.env
+-n:.env.*
+-n:*.local
 # === Version Control (use Git remote as source of truth) ===
--dnG:.git
+-dn:.git
+-s:*
