@@ -26,7 +26,20 @@
 -dp:android/build
 -dp:android/.gradle
 -dp:android/app/build
+# === Maestro / E2E Testing ===
 -dn:.maestro
+-n:hierarchy_*.csv
+-dp:tests/e2e/files
+-dp:tests/e2e/videos
+-dp:tests/e2e/screenshots
+-dp:tests/e2e/report
+-dp:tests/load/report
+# === Playwright ===
+-dn:test-results
+-dn:playwright-report
+-dn:blob-report
+-dp:playwright/.cache
+-dp:playwright/.auth
 # === System Files ===
 -n:.DS_Store
 -n:Thumbs.db
