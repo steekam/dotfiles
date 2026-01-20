@@ -42,6 +42,8 @@
 [user]
 	name = steekam
 	email = waynewanyee@gmail.com
+[includeIf "gitdir:~/Projects/Patrium/"]
+	path = ~/.dotfiles/shell/git/.gitconfig-patrium
 [include]
 	path = ~/.dotfiles-custom/shell/git/.gitconfig
 [gitbutler]

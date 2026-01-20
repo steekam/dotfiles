@@ -60,6 +60,8 @@
 -n:.env
 -n:.env.*
 -n:*.local
+# === Local config files ===
+-dp:config/local.json
 # === Version Control (use Git remote as source of truth) ===
 -dn:.git
 -s:*
