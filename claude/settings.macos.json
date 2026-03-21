@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcrun simctl list:*)",
+      "Bash(xcrun simctl boot:*)",
+      "Bash(xcrun simctl shutdown:*)",
+      "Bash(open -a Simulator)",
+      "Bash(open:*)",
+      "Bash(brew services list)",
+      "Bash(brew services info:*)",
+      "Bash(brew services start:*)",
+      "Bash(brew services stop:*)",
+      "Bash(brew services restart:*)"
+    ]
+  },
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Glass.aiff"
+          }
+        ]
+      }
+    ]
+  }
+}

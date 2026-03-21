@@ -56,9 +56,13 @@ echo 'Setup Claude Code config'
 echo '-----------------'
 mkdir -p $HOME/.claude
 [ -f $HOME/.claude/settings.json ] && rm $HOME/.claude/settings.json
-# Deep merge default settings with platform-specific overrides
+# Deep merge default settings with platform-specific overrides (concatenate allow arrays, override hooks)
 if [[ "$(uname)" == "Linux" ]] && [ -f $HOME/.dotfiles/claude/settings.linux.json ]; then
-    jq -s '.[0] * .[1]' $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.linux.json > $HOME/.claude/settings.json
+    jq -s '.[0] * .[1] * { permissions: { allow: (.[0].permissions.allow + .[1].permissions.allow) } }' \
+        $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.linux.json > $HOME/.claude/settings.json
+elif [[ "$(uname)" == "Darwin" ]] && [ -f $HOME/.dotfiles/claude/settings.macos.json ]; then
+    jq -s '.[0] * .[1] * { permissions: { allow: (.[0].permissions.allow + .[1].permissions.allow) } }' \
+        $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.macos.json > $HOME/.claude/settings.json
 else
     cp $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
 fi
