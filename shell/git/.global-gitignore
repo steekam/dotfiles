@@ -20,9 +20,6 @@ yarn-error.log
 # Misc
 .DS_*
 
-**/.tool-versions
-**/.mise.toml
-
 # Planning files for agent contex
 plan*.md
 

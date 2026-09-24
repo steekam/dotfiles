@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+case "$(uname -s)" in
+  Darwin) platform_settings="$root/claude/settings.macos.json" ;;
+  Linux) platform_settings="$root/claude/settings.linux.json" ;;
+  *)
+    printf '%s\n' 'Claude settings merge supports macOS and Linux.' >&2
+    exit 1
+    ;;
+esac
+
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+jq -s '.[0] * .[1] * { permissions: { allow: (.[0].permissions.allow + .[1].permissions.allow) } }' \
+  "$root/claude/settings.json" "$platform_settings" > "$tmp"
+
+target="$HOME/.claude/settings.json"
+mkdir -p "$HOME/.claude"
+if [[ -e "$target" || -L "$target" ]]; then
+  if cmp -s "$tmp" "$target"; then
+    printf '%s\n' 'Claude settings already match the shared and platform defaults.'
+  else
+    printf 'Preserved existing %s; review it before applying merged defaults.\n' "$target" >&2
+  fi
+else
+  install -m 600 "$tmp" "$target"
+  printf 'Created %s from shared and platform defaults.\n' "$target"
+fi

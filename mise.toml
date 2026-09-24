@@ -1,0 +1,91 @@
+[tool_alias]
+postgres = "vfox:mise-plugins/vfox-postgres"
+
+[tools]
+atuin = "18.19.0"
+bun = "1.3.6"
+go = "1.24.4"
+gradle = "7.6.4"
+java = "temurin-17"
+node = "22.21.1"
+pnpm = "10.15.1"
+postgres = "17.7"
+python = "3.12"
+ruby = "3.4.8"
+starship = "1.26.0"
+uv = "0.10.6"
+gh = "2.101.0"
+
+[settings]
+auto_install = true
+dotfiles.root = "~/.dotfiles"
+idiomatic_version_file_enable_tools = ["node"]
+
+[settings.python]
+compile = false
+
+[bootstrap.packages]
+"brew:git" = { os = "macos/arm64" }
+"brew:fd" = { os = "macos/arm64" }
+"brew:bat" = { os = "macos/arm64" }
+"brew:zoxide" = { os = "macos/arm64" }
+"brew:jq" = { os = "macos/arm64" }
+"brew:ripgrep" = { os = "macos/arm64" }
+"brew:fzf" = { os = "macos/arm64" }
+"brew:tmux" = { os = "macos/arm64" }
+"brew:openssl@3" = { os = "macos/arm64" }
+"brew:readline" = { os = "macos/arm64" }
+"apt:git" = { os = "linux" }
+"apt:fd-find" = { os = "linux" }
+"apt:bat" = { os = "linux" }
+"apt:zoxide" = { os = "linux" }
+"apt:zsh" = { os = "linux" }
+"apt:curl" = { os = "linux" }
+"apt:jq" = { os = "linux" }
+"apt:ripgrep" = { os = "linux" }
+"apt:fzf" = { os = "linux" }
+"apt:tmux" = { os = "linux" }
+"apt:build-essential" = { os = "linux" }
+"apt:libreadline-dev" = { os = "linux" }
+"apt:zlib1g-dev" = { os = "linux" }
+"apt:libssl-dev" = { os = "linux" }
+"apt:uuid-dev" = { os = "linux" }
+"dnf:git" = { os = "linux" }
+"dnf:fd-find" = { os = "linux" }
+"dnf:bat" = { os = "linux" }
+"dnf:zoxide" = { os = "linux" }
+"dnf:zsh" = { os = "linux" }
+"dnf:curl" = { os = "linux" }
+"dnf:jq" = { os = "linux" }
+"dnf:ripgrep" = { os = "linux" }
+"dnf:fzf" = { os = "linux" }
+"dnf:tmux" = { os = "linux" }
+"dnf:gcc" = { os = "linux" }
+"dnf:gcc-c++" = { os = "linux" }
+"dnf:make" = { os = "linux" }
+"dnf:pkgconf-pkg-config" = { os = "linux" }
+"dnf:readline-devel" = { os = "linux" }
+"dnf:zlib-devel" = { os = "linux" }
+"dnf:openssl-devel" = { os = "linux" }
+"dnf:libuuid-devel" = { os = "linux" }
+
+[dotfiles]
+"~/.zshenv" = { source = "shell/.zshenv" }
+"~/.zshrc" = { source = "shell/.zshrc" }
+"~/.gitconfig" = { source = "shell/git/.gitconfig" }
+"~/.global-gitignore" = { source = "shell/git/.global-gitignore" }
+"~/.config/mise/config.toml" = { source = "mise.toml" }
+"~/.config/starship.toml" = { source = ".config/starship.toml" }
+"~/.config/atuin/config.toml" = { source = ".config/atuin/config.toml" }
+"~/.vimrc" = { source = "shell/.vimrc" }
+"~/.claude/CLAUDE.md" = { source = "claude/CLAUDE.md" }
+"~/.claude/commands" = { source = "claude/commands" }
+"~/.codex/AGENTS.md" = { source = "codex/global-instructions.md" }
+"~/.config/opencode/commands" = { source = "opencode/commands" }
+
+[dotfiles."megaignore.default"]
+source = "mega/.megaignore.default"
+variants = [
+  { os = "macos", target = "~/Library/Application Support/Mega Limited/MEGAsync/.megaignore.default" },
+  { os = "linux", target = "~/.local/share/data/Mega Limited/MEGAsync/.megaignore.default" },
+]

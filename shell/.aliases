@@ -3,6 +3,14 @@ alias c='clear'
 alias zsh_config='vim ~/.zshrc'
 alias sshconfig="vim ~/.ssh/config"
 
+# Normalize alternate package names on Debian and older Ubuntu releases.
+if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
+  alias fd='fdfind'
+fi
+if ! command -v bat >/dev/null 2>&1 && command -v batcat >/dev/null 2>&1; then
+  alias bat='batcat'
+fi
+
 # List all files colorized in long format
 alias l="ls -laF"
 
@@ -28,6 +36,16 @@ alias gc="git checkout"
 alias gpo="git push origin"
 alias gst="git status"
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias g='git'
+alias gb='git branch'
+alias gba='git branch --all'
+alias gbD='git branch --delete --force'
+alias gcb='git checkout -b'
+alias gcp='git cherry-pick'
+alias gcs='git commit --gpg-sign'
+alias gl='git pull'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias gk='gitk --all --branches &!'
 
 
 # Windscribe

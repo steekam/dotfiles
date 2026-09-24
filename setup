@@ -1,114 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Install mise (runtime manager)
-echo 'Install mise'
-echo '-----------------'
-curl https://mise.run | sh
+root="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+cd "$root"
 
-# Install zsh
-echo 'Install oh-my-zsh'
-echo '-----------------'
-rm -rf $HOME/.oh-my-zsh
-curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-
-# Add global gitignore
-[ -f $HOME/.global-gitignore ] && rm $HOME/.global-gitignore
-ln -s $HOME/.dotfiles/shell/git/.global-gitignore $HOME/.global-gitignore
-# git config --global core.excludesfile $HOME/.global-gitignore
-
-# Add git config
-[ -f $HOME/.gitconfig ] && rm $HOME/.gitconfig
-ln -s $HOME/.dotfiles/shell/git/.gitconfig $HOME/.gitconfig
-
-# Include custom git config specific to this machine
-if [ -f ~/.dotfiles-custom/shell/git/.gitconfig ]; then
-    git config --global include.path ~/.dotfiles-custom/shell/git/.gitconfig
+if ! command -v mise >/dev/null 2>&1; then
+  printf '%s\n' 'Install mise first: https://mise.jdx.dev/getting-started.html' >&2
+  exit 1
 fi
 
-# Symlink zsh prefs
-rm $HOME/.zshrc
-ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
-
-# Install powerlevel10k theme
-echo 'Install powerlevel10k theme'
-echo '-----------------'
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/themes/powerlevel10k
-
-# Symlink p10k prefs
-[ -f $HOME/.p10k.zsh ] && rm $HOME/.p10k.zsh
-ln -s $HOME/.dotfiles/shell/.p10k.zsh $HOME/.p10k.zsh
-
-# Install zsh-autocompletions
-echo 'Install zsh-autocompletions plugin'
-echo '-----------------'
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-
-#
-# Setting up vim
-#
-echo 'Symlink .vimrc'
-echo '-----------------'
-[ -f $HOME/.vimrc ] && rm $HOME/.vimrc
-ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
-
-# Claude Code config
-echo 'Setup Claude Code config'
-echo '-----------------'
-mkdir -p $HOME/.claude
-[ -f $HOME/.claude/settings.json ] && rm $HOME/.claude/settings.json
-# Deep merge default settings with platform-specific overrides (concatenate allow arrays, override hooks)
-if [[ "$(uname)" == "Linux" ]] && [ -f $HOME/.dotfiles/claude/settings.linux.json ]; then
-    jq -s '.[0] * .[1] * { permissions: { allow: (.[0].permissions.allow + .[1].permissions.allow) } }' \
-        $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.linux.json > $HOME/.claude/settings.json
-elif [[ "$(uname)" == "Darwin" ]] && [ -f $HOME/.dotfiles/claude/settings.macos.json ]; then
-    jq -s '.[0] * .[1] * { permissions: { allow: (.[0].permissions.allow + .[1].permissions.allow) } }' \
-        $HOME/.dotfiles/claude/settings.json $HOME/.dotfiles/claude/settings.macos.json > $HOME/.claude/settings.json
+if [[ $# -eq 0 ]]; then
+  mise bootstrap
+  "$root/setup-apps"
 else
-    cp $HOME/.dotfiles/claude/settings.json $HOME/.claude/settings.json
+  mise bootstrap "$@"
 fi
-[ -f $HOME/.claude/CLAUDE.md ] && rm $HOME/.claude/CLAUDE.md
-ln -s $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
-[ -d $HOME/.claude/commands ] && rm -r $HOME/.claude/commands
-ln -s $HOME/.dotfiles/claude/commands $HOME/.claude/commands
-
-# Codex config
-echo 'Setup Codex config'
-echo '-----------------'
-mkdir -p $HOME/.codex
-[ -f $HOME/.codex/AGENTS.md ] && rm $HOME/.codex/AGENTS.md
-ln -s $HOME/.dotfiles/codex/global-instructions.md $HOME/.codex/AGENTS.md
-
-# OpenCode config (~/.config/opencode on both macOS and Linux)
-echo 'Symlink OpenCode config'
-echo '-----------------'
-mkdir -p $HOME/.config/opencode
-[ -f $HOME/.config/opencode/opencode.json ] && rm $HOME/.config/opencode/opencode.json
-ln -s $HOME/.dotfiles/opencode/opencode.json $HOME/.config/opencode/opencode.json
-[ -d $HOME/.config/opencode/commands ] && rm -r $HOME/.config/opencode/commands
-ln -s $HOME/.dotfiles/opencode/commands $HOME/.config/opencode/commands
-
-# MegaSync default ignore template (platform-specific location)
-echo 'Setup MegaSync default ignore template'
-echo '-----------------'
-if [[ "$(uname)" == "Darwin" ]]; then
-    MEGA_CONFIG_DIR="$HOME/Library/Application Support/Mega Limited/MEGAsync"
-else
-    MEGA_CONFIG_DIR="$HOME/.local/share/data/Mega Limited/MEGAsync"
-fi
-mkdir -p "$MEGA_CONFIG_DIR"
-[ -f "$MEGA_CONFIG_DIR/.megaignore.default" ] && rm "$MEGA_CONFIG_DIR/.megaignore.default"
-ln -s "$HOME/.dotfiles/mega/.megaignore.default" "$MEGA_CONFIG_DIR/.megaignore.default"
-
-echo '++++++++++++++++++++++++++++++'
-echo '++++++++++++++++++++++++++++++'
-echo 'All done!'
-echo 'Things to do to make the pk10 terminal theme work:'
-echo '1. Install menlo patched font included in ~/.dotfiles/misc'
-
-echo '++++++++++++++++++++++++++++++'
-echo 'Some optional tidbits'
-
-echo '1. Make a .dotfiles-custom/shell/.aliases for your personal commands'
-
-echo '++++++++++++++++++++++++++++++'
-echo '++++++++++++++++++++++++++++++'
