@@ -6,6 +6,7 @@ for file in \
   "$HOME/.dotfiles/shell/.exports" \
   "$HOME/.dotfiles/shell/.aliases" \
   "$HOME/.dotfiles/shell/.functions" \
+  "$HOME/.dotfiles/shell/.directories" \
   "$HOME/.dotfiles-custom/shell/.exports" \
   "$HOME/.dotfiles-custom/shell/.aliases" \
   "$HOME/.dotfiles-custom/shell/.functions"; do
@@ -24,7 +25,6 @@ if [[ -d "$HOME/go/bin" ]]; then
 fi
 
 setopt APPEND_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_SAVE_NO_DUPS
-setopt AUTO_CD
 
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"

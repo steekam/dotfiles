@@ -97,6 +97,7 @@ chsh -s "$(command -v zsh)"
 - Add local paths and machine aliases to `.dotfiles-custom/shell/local.zsh` or
   `.dotfiles-custom/shell/.aliases`. The shared shell loads these only when
   present.
+- Shared directory options, shortcuts, and helpers live in `shell/.directories`.
 - Put machine-specific variables needed by non-interactive Zsh in
   `.dotfiles-custom/shell/local.env.zsh`; `.zshenv` sources it only when present.
 
