@@ -37,3 +37,11 @@ CLAUDE.md
 .opencode
 opencode.json
 .claude
+# claude's project mcp
+.mcp.json
+
+solo.yml
+
+local-sandbox
+logs
+*.log

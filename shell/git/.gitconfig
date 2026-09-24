@@ -1,6 +1,7 @@
 [core]
 	excludesfile = ~/.global-gitignore
 	autocrlf = input
+	filemode = false
     ; fsmonitor = true
     ; untrackedCache = true
 [column]
@@ -48,3 +49,9 @@
 	path = ~/.dotfiles-custom/shell/git/.gitconfig
 [gitbutler]
 	gitbutlerCommitter = 0
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

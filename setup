@@ -71,6 +71,13 @@ ln -s $HOME/.dotfiles/claude/CLAUDE.md $HOME/.claude/CLAUDE.md
 [ -d $HOME/.claude/commands ] && rm -r $HOME/.claude/commands
 ln -s $HOME/.dotfiles/claude/commands $HOME/.claude/commands
 
+# Codex config
+echo 'Setup Codex config'
+echo '-----------------'
+mkdir -p $HOME/.codex
+[ -f $HOME/.codex/AGENTS.md ] && rm $HOME/.codex/AGENTS.md
+ln -s $HOME/.dotfiles/codex/global-instructions.md $HOME/.codex/AGENTS.md
+
 # OpenCode config (~/.config/opencode on both macOS and Linux)
 echo 'Symlink OpenCode config'
 echo '-----------------'

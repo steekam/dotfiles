@@ -153,3 +153,27 @@ if [[ "$_OS" == "Linux" ]]; then
   esac
 fi
 # pnpm end
+
+# opencode
+export PATH=/Users/steekam/.opencode/bin:$PATH
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/steekam/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/steekam/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/steekam/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/steekam/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/85/"
+
+
+# Herd injected PHP 8.6 configuration.
+export HERD_PHP_86_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/86"
