@@ -1,5 +1,6 @@
 autoload -Uz compinit
 compinit -i
+autoload -Uz zmv
 
 for file in \
   "$HOME/.dotfiles/shell/.exports" \
@@ -23,6 +24,7 @@ if [[ -d "$HOME/go/bin" ]]; then
 fi
 
 setopt APPEND_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_SAVE_NO_DUPS
+setopt AUTO_CD
 
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
@@ -33,6 +35,10 @@ if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
+if command -v fzf >/dev/null 2>&1; then
+  FZF_CTRL_R_COMMAND= source <(fzf --zsh)
+fi
+
 if command -v atuin >/dev/null 2>&1; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
@@ -40,3 +46,15 @@ fi
 if [[ "${TERM:-}" != dumb ]] && command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
+
+for file in \
+  "${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh}" \
+  /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+  /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+  /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+  /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh; do
+  if [[ -r "$file" ]]; then
+    source "$file"
+    break
+  fi
+done

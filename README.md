@@ -62,7 +62,14 @@ bootstrap supports several managers, including `dnf` for Fedora.
 
 The default CLI set also includes `fd-find`, `bat`, and `zoxide`. Zoxide is
 initialized in Zsh (`z`/`zi`); on Debian and older Ubuntu releases, aliases map
-`fdfind` to `fd` and `batcat` to `bat` when needed.
+`fdfind` to `fd` and `batcat` to `bat` when needed. Starship uses its built-in
+prompt and context-aware language modules. Meslo Nerd Font files in `misc/`
+are linked into the user's font directory on macOS or Linux by the dotfile
+setup. Select `MesloLGS NF` in the terminal's profile to render prompt icons.
+Zsh loads fzf's key
+bindings and completions when available, while Atuin keeps `Ctrl-R`; the
+`zsh-autosuggestions` package adds inline history suggestions, accepted with
+Right Arrow. The built-in `zmv` command is available for batch renames.
 
 `setup` also creates Claude's platform-specific settings only when the target
 does not exist. If settings already exist and differ, it reports that and leaves

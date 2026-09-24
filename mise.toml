@@ -32,6 +32,7 @@ compile = false
 "brew:jq" = { os = "macos/arm64" }
 "brew:ripgrep" = { os = "macos/arm64" }
 "brew:fzf" = { os = "macos/arm64" }
+"brew:zsh-autosuggestions" = { os = "macos/arm64" }
 "brew:tmux" = { os = "macos/arm64" }
 "brew:openssl@3" = { os = "macos/arm64" }
 "brew:readline" = { os = "macos/arm64" }
@@ -44,6 +45,7 @@ compile = false
 "apt:jq" = { os = "linux" }
 "apt:ripgrep" = { os = "linux" }
 "apt:fzf" = { os = "linux" }
+"apt:zsh-autosuggestions" = { os = "linux" }
 "apt:tmux" = { os = "linux" }
 "apt:build-essential" = { os = "linux" }
 "apt:libreadline-dev" = { os = "linux" }
@@ -59,6 +61,7 @@ compile = false
 "dnf:jq" = { os = "linux" }
 "dnf:ripgrep" = { os = "linux" }
 "dnf:fzf" = { os = "linux" }
+"dnf:zsh-autosuggestions" = { os = "linux" }
 "dnf:tmux" = { os = "linux" }
 "dnf:gcc" = { os = "linux" }
 "dnf:gcc-c++" = { os = "linux" }
@@ -82,6 +85,20 @@ compile = false
 "~/.claude/commands" = { source = "claude/commands" }
 "~/.codex/AGENTS.md" = { source = "codex/global-instructions.md" }
 "~/.config/opencode/commands" = { source = "opencode/commands" }
+
+[dotfiles."meslo-regular"]
+source = "misc/MesloLGS NF Regular.ttf"
+variants = [
+  { os = "macos", target = "~/Library/Fonts/MesloLGS NF Regular.ttf" },
+  { os = "linux", target = "~/.local/share/fonts/MesloLGS NF Regular.ttf" },
+]
+
+[dotfiles."meslo-bold"]
+source = "misc/MesloLGS NF Bold.ttf"
+variants = [
+  { os = "macos", target = "~/Library/Fonts/MesloLGS NF Bold.ttf" },
+  { os = "linux", target = "~/.local/share/fonts/MesloLGS NF Bold.ttf" },
+]
 
 [dotfiles."megaignore.default"]
 source = "mega/.megaignore.default"
