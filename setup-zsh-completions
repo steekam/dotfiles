@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  brew_prefix="${HOMEBREW_PREFIX:-}"
+  if [[ -z "$brew_prefix" ]] && command -v brew >/dev/null 2>&1; then
+    brew_prefix="$(brew --prefix)"
+  fi
+  [[ -d "$brew_prefix/share/zsh-completions" ]] && exit 0
+fi
+
+target="$HOME/.local/share/zsh-completions"
+if [[ -d "$target/src" ]]; then
+  exit 0
+fi
+if [[ -e "$target" ]]; then
+  printf 'Existing path is not a zsh-completions checkout: %s\n' "$target" >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "$target")"
+git clone --depth 1 --branch 0.36.0 \
+  https://github.com/zsh-users/zsh-completions.git "$target"

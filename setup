@@ -11,6 +11,7 @@ fi
 
 if [[ $# -eq 0 ]]; then
   mise bootstrap
+  "$root/setup-zsh-completions"
   "$root/setup-apps"
 else
   mise bootstrap "$@"

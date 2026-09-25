@@ -33,6 +33,7 @@ compile = false
 "brew:ripgrep" = { os = "macos/arm64" }
 "brew:fzf" = { os = "macos/arm64" }
 "brew:zsh-autosuggestions" = { os = "macos/arm64" }
+"brew:zsh-completions" = { os = "macos/arm64" }
 "brew:tmux" = { os = "macos/arm64" }
 "brew:openssl@3" = { os = "macos/arm64" }
 "brew:readline" = { os = "macos/arm64" }

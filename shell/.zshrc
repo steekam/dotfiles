@@ -1,3 +1,11 @@
+for dir in \
+  "${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share/zsh-completions}" \
+  "$HOME/.local/share/zsh-completions/src"; do
+  if [[ -n "$dir" && -d "$dir" && ${fpath[(Ie)$dir]} -eq 0 ]]; then
+    fpath=("$dir" $fpath)
+  fi
+done
+
 autoload -Uz compinit
 compinit -i
 autoload -Uz zmv
@@ -14,6 +22,8 @@ for file in \
 done
 
 [[ -r "$HOME/.dotfiles-custom/shell/local.zsh" ]] && source "$HOME/.dotfiles-custom/shell/local.zsh"
+
+path+=(./node_modules/.bin)
 
 if [[ -d "$HOME/.local/bin" ]]; then
   path=("$HOME/.local/bin" $path)

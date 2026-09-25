@@ -69,7 +69,9 @@ setup. Select `MesloLGS NF` in the terminal's profile to render prompt icons.
 Zsh loads fzf's key
 bindings and completions when available, while Atuin keeps `Ctrl-R`; the
 `zsh-autosuggestions` package adds inline history suggestions, accepted with
-Right Arrow. The built-in `zmv` command is available for batch renames.
+Right Arrow. `zsh-completions` adds community completion definitions; setup uses
+Homebrew on Apple Silicon and installs the pinned upstream release elsewhere.
+The built-in `zmv` command is available for batch renames.
 
 `setup` also creates Claude's platform-specific settings only when the target
 does not exist. If settings already exist and differ, it reports that and leaves

@@ -137,9 +137,15 @@ and private values out of the shared repo.
   Atuin initialization, and Starship initialization.
 - [x] Start without a Zsh framework or plugin manager. Add a plugin only when a
   specific missing behavior justifies it.
+- [x] Restore `zsh-completions` for missing command completions. Add its
+  Homebrew path before `compinit`; bootstrap a pinned upstream checkout where
+  Homebrew is unavailable.
 - [x] Move app-generated setup (Android SDK, Herd, Google Cloud, Vite+, and
   similar) into optional machine-local includes. Manage the shared `.zshenv`
   entry through mise; the local env include stays optional.
+- [x] Restore `ANDROID_NDK_ROOT` in the machine-local include when the
+  project's pinned NDK 28.2.13676358 is installed; keep Gradle's `ndkVersion`
+  as the project-level version selection.
 - [x] Remove hardcoded `/Users/steekam` and `/home/steekam` paths from shared
   shell config. Keep PATH entries only for tools mise does not own.
 - [x] Configure Starship with only the prompt modules wanted day to day.
