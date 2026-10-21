@@ -36,11 +36,6 @@ fi
 
 setopt APPEND_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_SAVE_NO_DUPS
 
-if command -v mise >/dev/null 2>&1; then
-  eval "$(mise activate zsh)"
-  eval "$(mise completion zsh)"
-fi
-
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
@@ -68,3 +63,5 @@ for file in \
     break
   fi
 done
+
+eval "$(/Users/steekam/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
