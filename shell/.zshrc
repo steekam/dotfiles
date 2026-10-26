@@ -34,6 +34,11 @@ if [[ -d "$HOME/go/bin" ]]; then
   path=("$GOPATH/bin" $path)
 fi
 
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+  eval "$(mise completion zsh)"
+fi
+
 setopt APPEND_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_SAVE_NO_DUPS
 
 if command -v zoxide >/dev/null 2>&1; then
@@ -64,4 +69,13 @@ for file in \
   fi
 done
 
-eval "$(/Users/steekam/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/84"
+
+
+# Herd injected PHP 8.6 configuration.
+export HERD_PHP_86_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/86"
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/steekam/Library/Application Support/Herd/config/php/85"
