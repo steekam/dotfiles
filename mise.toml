@@ -18,6 +18,7 @@ gh = "2.101.0"
 "npm:agent-device" = "latest"
 "npm:eas-cli" = "latest"
 "npm:agent-browser" = "latest"
+"npm:agent-desktop" = { version = "latest", allow_builds = ["agent-desktop"] }
 
 [settings]
 auto_install = true
