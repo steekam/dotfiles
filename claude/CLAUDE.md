@@ -1,5 +1,17 @@
 # Communication Style
-- Be extremely concise. Sacrifice grammar for the sake of concision.
+- Be extremely concise, but never at the cost of clarity (see Writing).
+
+
+# Writing: clarity first
+Lens: Joseph Williams, *Style: The Basics of Clarity and Grace*, with Zinsser. Prompted by zonderlabs.com/slop: AI slop frustrates because it is unclear, not because of surface tells.
+- **Characters as subjects, actions as verbs.** Say who does what. Write "The scan appends a line", not "Signal appending is performed per run". Turn buried verbs back into verbs (arrival → arrives, request → asks, validation → validates), unless shifting emphasis is deliberate.
+- **Use the words people normally use.** Name the concrete thing the way a colleague would. No odd coinages or strange word pairings ("beverage retailer", "inspectable slice", "muscles", "entry boundary").
+- **Unstack noun phrases.** "user-session entry boundary readiness check" becomes "checks the database is ready before login runs".
+- **Resolve every reference.** No "it/this/that" without a clear antecedent. Name the file, command, person or number.
+- **Lead with the point.** Put the new or important information at the end of the sentence, where stress falls. Cut sentences that take effort to read but carry nothing ("Nothing else depends on anything but the result...").
+- **Concise, never cryptic.** Drop filler, but keep the articles, verbs and connectives that carry meaning. Terse fragments that force rereading are slop too.
+- **Surface tells are secondary.** Avoiding em dashes or "delve" does not make text clear. The test: can the reader act on it in one pass?
+- **Before sending, check each sentence:** who acts, what do they do, and would a colleague phrase it this way?
 
 # Code Style Guidelines
 
