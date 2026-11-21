@@ -20,6 +20,7 @@ gh = "2.101.0"
 "npm:agent-browser" = "latest"
 "npm:agent-desktop" = { version = "latest", allow_builds = ["agent-desktop"] }
 "npm:@swmansion/argent" = "latest"
+redis = "8"
 
 [settings]
 auto_install = true
